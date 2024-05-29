@@ -812,7 +812,7 @@ function islandora_user_access($object_or_datastream, array $permissions, array 
 
   // Determine the user account to test against.
   if (!isset($user)) {
-    $token = filter_input(INPUT_GET, 'token', FILTER_SANITIZE_STRING);
+    $token = htmlspecialchars(filter_input(INPUT_GET, 'token'));
     if ($token) {
       module_load_include('inc', 'islandora', 'includes/authtokens');
       $token_user = islandora_validate_object_token($object->id, $datastream->id, $token);
@@ -907,7 +907,7 @@ function islandora_object_datastream_tokened_access_callback($perm, $object = NU
   // potential match in the db.
   $token_account = NULL;
   if (is_object($object) && is_object($datastream)) {
-    $token = filter_input(INPUT_GET, 'token', FILTER_SANITIZE_STRING);
+    $token = htmlspecialchars(filter_input(INPUT_GET, 'token'));
 
     if ($token) {
       $user = islandora_validate_object_token($object->id, $datastream->id, $token);
@@ -1289,7 +1289,7 @@ function islandora_object_load($object_id) {
  */
 function islandora_tokened_object_load($object_id, array $map) {
   if (array_key_exists('token', $_GET)) {
-    $token = filter_input(INPUT_GET, 'token', FILTER_SANITIZE_STRING);
+    $token = htmlspecialchars(filter_input(INPUT_GET, 'token'));
     if ($token) {
       module_load_include('inc', 'islandora', 'includes/authtokens');
       $token_user = islandora_validate_object_token($object_id, $map[4], $token);
