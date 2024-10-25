@@ -876,7 +876,9 @@ function islandora_as_renderable_array(array &$markup_array) {
  *   The sanitized string.
  */
 function islandora_sanitize_input_for_valid_xml($input, $replacement = '') {
-  $input = preg_replace('/[^\x9\xA\xD\x20-\x{D7FF}\x{E000}-\x{FFFD}\x{10000}-\x{10FFFF}]/u', $replacement, $input);
+  if (!is_null($input)) {
+    $input = preg_replace('/[^\x9\xA\xD\x20-\x{D7FF}\x{E000}-\x{FFFD}\x{10000}-\x{10FFFF}]/u', $replacement, $input);
+  }
   return $input;
 }
 

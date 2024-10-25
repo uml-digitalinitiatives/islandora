@@ -766,7 +766,7 @@ function islandora_ingest_form_ingest_button(array &$form_state) {
     '#type' => 'submit',
     '#name' => 'ingest',
     '#value' => t('Ingest'),
-    '#process' => array('islandora_ingest_form_ingest_button_process'),
+    #'#process' => array('islandora_ingest_form_ingest_button_process'),  # XXX: This is not working.
     '#validate' => $validate,
     '#submit' => $submit,
   );
